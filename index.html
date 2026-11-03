@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="color-scheme" content="dark" />
+<meta name="theme-color" content="#070b16" />
+<title>Khan Trig Companion · Unit 1 Right Triangle Studio</title>
+<meta name="description" content="An interactive, bilingual companion for Khan Academy Trigonometry Unit 1: right triangles, SOH-CAH-TOA, special triangles, reciprocal ratios and practice." />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23070b16'/%3E%3Cpath d='M14 48 L50 48 L50 18 Z' fill='none' stroke='%2300E5FF' stroke-width='4' stroke-linejoin='round'/%3E%3Cpath d='M38 48 L38 36 L50 36' fill='none' stroke='%23FFD600' stroke-width='3'/%3E%3C/svg%3E" />
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<div class="aurora" aria-hidden="true"></div>
+
+<div class="app">
+  <header class="hud">
+    <div class="brand">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 64 64" width="44" height="44" role="img" aria-label="Right triangle">
+          <path d="M12 50 L52 50 L52 16 Z" fill="none" stroke="var(--hyp)" stroke-width="4" stroke-linejoin="round" />
+          <path d="M40 50 L40 38 L52 38" fill="none" stroke="var(--theta)" stroke-width="3" />
+          <circle cx="12" cy="50" r="4" fill="var(--theta)" />
+        </svg>
+      </span>
+      <div class="brand-text">
+        <h1 data-i18n="appTitle">Khan Trig Companion</h1>
+        <p><span data-i18n="unitLabel">Unit 1</span> · <span data-i18n="appSubtitle">Right Triangle Studio</span></p>
+      </div>
+    </div>
+
+    <div class="hud-stats" aria-label="Progress summary">
+      <div class="stat">
+        <span class="stat-label" data-i18n="streak">Streak</span>
+        <strong id="streakValue">0</strong>
+      </div>
+      <div class="stat">
+        <span class="stat-label" data-i18n="best">Best</span>
+        <strong id="bestValue">0</strong>
+      </div>
+      <div class="stat">
+        <span class="stat-label" data-i18n="mastery">Mastery</span>
+        <strong id="masteryValue">0%</strong>
+      </div>
+    </div>
+
+    <div class="hud-actions">
+      <button id="langToggle" class="btn btn-ghost" type="button" aria-label="Switch language between English and Thai" title="EN / TH">
+        <span aria-hidden="true">🌐</span>
+        <span id="langLabel">EN ⇄ TH</span>
+      </button>
+      <button id="exportBtn" class="btn btn-primary" type="button" data-i18n-title="exportTitle" title="Download your saved progress">
+        <span aria-hidden="true">💾</span>
+        <span data-i18n="export">Export Progress JSON</span>
+      </button>
+    </div>
+  </header>
+
+  <nav class="tabs" role="tablist" aria-label="Learning modules">
+    <button class="tab is-active" role="tab" aria-selected="true" aria-controls="panel-ratio" id="tab-ratio" data-module="ratio" type="button">
+      <span class="tab-index">01</span>
+      <span class="tab-label" data-i18n="navRatio">SOH·CAH·TOA</span>
+      <span class="tab-check" aria-hidden="true">✓</span>
+    </button>
+    <button class="tab" role="tab" aria-selected="false" aria-controls="panel-special" id="tab-special" data-module="special" type="button" tabindex="-1">
+      <span class="tab-index">02</span>
+      <span class="tab-label" data-i18n="navSpecial">Special Triangles</span>
+      <span class="tab-check" aria-hidden="true">✓</span>
+    </button>
+    <button class="tab" role="tab" aria-selected="false" aria-controls="panel-reciprocal" id="tab-reciprocal" data-module="reciprocal" type="button" tabindex="-1">
+      <span class="tab-index">03</span>
+      <span class="tab-label" data-i18n="navReciprocal">Reciprocal Ratios</span>
+      <span class="tab-check" aria-hidden="true">✓</span>
+    </button>
+    <button class="tab" role="tab" aria-selected="false" aria-controls="panel-practice" id="tab-practice" data-module="practice" type="button" tabindex="-1">
+      <span class="tab-index">04</span>
+      <span class="tab-label" data-i18n="navPractice">Practice Sandbox</span>
+      <span class="tab-check" aria-hidden="true">✓</span>
+    </button>
+  </nav>
+
+  <main>
+    <!-- ============================= MODULE 1 ============================= -->
+    <section class="panel is-active" id="panel-ratio" role="tabpanel" aria-labelledby="tab-ratio">
+      <div class="panel-head">
+        <div>
+          <h2 data-i18n="m1.title">SOH-CAH-TOA &amp; Ratio Constancy</h2>
+          <p class="lede" data-i18n="m1.desc">Drag the vertices or move the sliders. Scale the triangle and watch the ratios refuse to move.</p>
+        </div>
+        <div class="pill" data-i18n="m1.goal">Goal: ratios depend only on θ</div>
+      </div>
+
+      <div class="grid ratio-grid">
+        <article class="card canvas-card">
+          <div class="canvas-head">
+            <div class="legend" aria-hidden="true">
+              <span class="legend-item"><i class="dot dot-hyp"></i><span data-i18n="hyp">Hypotenuse (c)</span></span>
+              <span class="legend-item"><i class="dot dot-opp"></i><span data-i18n="opp">Opposite (a)</span></span>
+              <span class="legend-item"><i class="dot dot-adj"></i><span data-i18n="adj">Adjacent (b)</span></span>
+              <span class="legend-item"><i class="dot dot-theta"></i><span data-i18n="theta">Angle (θ)</span></span>
+            </div>
+          </div>
+          <div class="canvas-wrap canvas-wrap-ratio">
+            <canvas id="ratioCanvas" role="img" aria-label="Interactive right triangle with draggable vertices. Use the angle and scale sliders for non-pointer control."></canvas>
+            <div id="scaleBadge" class="scale-badge" role="status" aria-live="polite" hidden>
+              <span aria-hidden="true">✨</span>
+              <span data-i18n="m1.constantBadge">Triangle size changed, but ratios remain 100% CONSTANT!</span>
+            </div>
+            <p class="canvas-hint" data-i18n="m1.dragHint">Drag A to tilt · drag C to resize · drag B to slide</p>
+          </div>
+        </article>
+
+        <aside class="stack">
+          <article class="card controls-card">
+            <div class="control">
+              <div class="control-head">
+                <label for="angleSlider" data-i18n="m1.angle">Angle θ</label>
+                <output id="angleOut" class="control-out" for="angleSlider">30.0°</output>
+              </div>
+              <input id="angleSlider" class="range range-theta" type="range" min="5" max="85" step="0.5" value="30" />
+              <div class="range-scale"><span>5°</span><span>45°</span><span>85°</span></div>
+            </div>
+
+            <div class="control">
+              <div class="control-head">
+                <label for="scaleSlider" data-i18n="m1.scale">Scale / Zoom</label>
+                <output id="scaleOut" class="control-out" for="scaleSlider">1.00×</output>
+              </div>
+              <input id="scaleSlider" class="range range-hyp" type="range" min="0.5" max="2.5" step="0.05" value="1" />
+              <div class="range-scale"><span>0.5×</span><span>1.5×</span><span>2.5×</span></div>
+            </div>
+          </article>
+
+          <article class="card">
+            <h3 class="card-title" data-i18n="m1.sides">Live side lengths</h3>
+            <div class="side-readouts">
+              <div class="side-chip side-opp">
+                <span class="side-tag" data-i18n="oppShort">a · opposite</span>
+                <strong id="sideA">4.0000</strong>
+              </div>
+              <div class="side-chip side-adj">
+                <span class="side-tag" data-i18n="adjShort">b · adjacent</span>
+                <strong id="sideB">6.9282</strong>
+              </div>
+              <div class="side-chip side-hyp">
+                <span class="side-tag" data-i18n="hypShort">c · hypotenuse</span>
+                <strong id="sideC">8.0000</strong>
+              </div>
+            </div>
+          </article>
+
+          <article class="card formulas-card">
+            <h3 class="card-title" data-i18n="m1.ratios">Live ratio equations</h3>
+            <div class="ratio-row" data-ratio="sin">
+              <span class="ratio-name">sin θ</span>
+              <span class="ratio-body">
+                <span class="frac frac-sym"><span class="num">a</span><span class="den">c</span></span>
+                <span class="eq">=</span>
+                <span class="frac"><span class="num" id="sinA">4.0000</span><span class="den" id="sinC">8.0000</span></span>
+                <span class="eq">=</span>
+                <span class="ratio-value" id="sinVal">0.5000</span>
+              </span>
+            </div>
+            <div class="ratio-row" data-ratio="cos">
+              <span class="ratio-name">cos θ</span>
+              <span class="ratio-body">
+                <span class="frac frac-sym"><span class="num">b</span><span class="den">c</span></span>
+                <span class="eq">=</span>
+                <span class="frac"><span class="num" id="cosB">6.9282</span><span class="den" id="cosC">8.0000</span></span>
+                <span class="eq">=</span>
+                <span class="ratio-value" id="cosVal">0.8660</span>
+              </span>
+            </div>
+            <div class="ratio-row" data-ratio="tan">
+              <span class="ratio-name">tan θ</span>
+              <span class="ratio-body">
+                <span class="frac frac-sym"><span class="num">a</span><span class="den">b</span></span>
+                <span class="eq">=</span>
+                <span class="frac"><span class="num" id="tanA">4.0000</span><span class="den" id="tanB">6.9282</span></span>
+                <span class="eq">=</span>
+                <span class="ratio-value" id="tanVal">0.5774</span>
+              </span>
+            </div>
+            <p class="micro" data-i18n="m1.scaleHint">Only the side lengths change with scale — the three decimals below never do.</p>
+          </article>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ============================= MODULE 2 ============================= -->
+    <section class="panel" id="panel-special" role="tabpanel" aria-labelledby="tab-special" hidden>
+      <div class="panel-head">
+        <div>
+          <h2 data-i18n="m2.title">Special Right Triangles</h2>
+          <p class="lede" data-i18n="m2.desc">Master exact radical relationships for 45°-45°-90° and 30°-60°-90° triangles — no calculator required.</p>
+        </div>
+        <div class="pill" data-i18n="m2.goal">Goal: recall exact side ratios</div>
+      </div>
+
+      <div class="grid special-grid">
+        <article class="card canvas-card">
+          <div class="canvas-wrap canvas-wrap-special">
+            <canvas id="specialCanvas" role="img" aria-label="Special right triangle diagram with exact side labels."></canvas>
+          </div>
+        </article>
+
+        <aside class="stack">
+          <article class="card controls-card">
+            <fieldset class="radio-set">
+              <legend class="sr-only">Triangle type</legend>
+              <label class="radio-card">
+                <input type="radio" name="specialType" value="45" checked />
+                <span class="radio-body">
+                  <strong data-i18n="m2.iso">45° · 45° · 90°</strong>
+                  <small data-i18n="m2.isoSub">Isosceles · legs x, x</small>
+                </span>
+              </label>
+              <label class="radio-card">
+                <input type="radio" name="specialType" value="30" />
+                <span class="radio-body">
+                  <strong data-i18n="m2.scalene">30° · 60° · 90°</strong>
+                  <small data-i18n="m2.scaleneSub">Scalene · short leg x</small>
+                </span>
+              </label>
+            </fieldset>
+
+            <div class="control">
+              <div class="control-head">
+                <label for="xSlider" data-i18n="m2.base">Base variable x</label>
+                <output id="xOut" class="control-out" for="xSlider">8</output>
+              </div>
+              <input id="xSlider" class="range range-theta" type="range" min="1" max="20" step="1" value="8" />
+              <div class="range-scale"><span>1</span><span>10</span><span>20</span></div>
+            </div>
+          </article>
+
+          <article class="card">
+            <h3 class="card-title" data-i18n="m2.exact">Exact side values</h3>
+            <div class="exact-table" id="exactTable">
+              <div class="exact-row">
+                <span class="exact-name" data-i18n="m2.side1">Short leg</span>
+                <span class="exact-radical" id="exact1Rad">x</span>
+                <span class="exact-dec" id="exact1Dec">8.00</span>
+              </div>
+              <div class="exact-row">
+                <span class="exact-name" data-i18n="m2.side2">Other leg</span>
+                <span class="exact-radical" id="exact2Rad">x</span>
+                <span class="exact-dec" id="exact2Dec">8.00</span>
+              </div>
+              <div class="exact-row">
+                <span class="exact-name" data-i18n="m2.side3">Hypotenuse</span>
+                <span class="exact-radical" id="exact3Rad">x√2</span>
+                <span class="exact-dec" id="exact3Dec">11.31</span>
+              </div>
+            </div>
+            <p class="micro" id="specialNote" data-i18n="m2.note45">The ratio of the legs is always 1 : 1, so both acute angles are 45°.</p>
+          </article>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ============================= MODULE 3 ============================= -->
+    <section class="panel" id="panel-reciprocal" role="tabpanel" aria-labelledby="tab-reciprocal" hidden>
+      <div class="panel-head">
+        <div>
+          <h2 data-i18n="m3.title">Reciprocal Ratios &amp; Duality</h2>
+          <p class="lede" data-i18n="m3.desc">Cosecant, secant and cotangent are not new magic — they are the primary ratios flipped upside down.</p>
+        </div>
+        <div class="pill" data-i18n="m3.goal">Goal: see the flip, not a new rule</div>
+      </div>
+
+      <article class="card controls-card recip-controls">
+        <div class="control">
+          <div class="control-head">
+            <label for="recipSlider" data-i18n="m3.angle">Angle θ</label>
+            <output id="recipOut" class="control-out" for="recipSlider">35.0°</output>
+          </div>
+          <input id="recipSlider" class="range range-theta" type="range" min="0" max="90" step="0.5" value="35" />
+          <div class="range-scale"><span>0°</span><span>45°</span><span>90°</span></div>
+        </div>
+      </article>
+
+      <div class="grid recip-grid">
+        <article class="card canvas-card recip-canvas-card">
+          <div class="canvas-wrap canvas-wrap-recip">
+            <canvas id="recipCanvas" role="img" aria-label="Right triangle for the selected angle, with reciprocal ratios listed beside it."></canvas>
+          </div>
+          <div class="recip-triplet" id="recipTriplet"></div>
+        </article>
+
+        <div class="recip-cards">
+          <article class="card ratio-card" data-pair="sin">
+            <header>
+              <span class="pair-badge">sin ↔ csc</span>
+              <span class="warn-badge" id="warnSin" hidden data-i18n="m3.undefined">undefined</span>
+            </header>
+            <div class="pair-row">
+              <div class="pair-side">
+                <span class="pair-name">sin θ</span>
+                <span class="pair-formula"><span class="frac frac-sym"><span class="num">opp</span><span class="den">hyp</span></span></span>
+                <strong class="pair-value" id="recipSinVal">0.5736</strong>
+              </div>
+              <span class="pair-arrow" aria-hidden="true">⇄</span>
+              <div class="pair-side">
+                <span class="pair-name">csc θ</span>
+                <span class="pair-formula"><span class="frac frac-sym"><span class="num">hyp</span><span class="den">opp</span></span></span>
+                <strong class="pair-value" id="recipCscVal">1.7434</strong>
+              </div>
+            </div>
+            <p class="micro" data-i18n="m3.sinNote">csc θ is just 1 ÷ sin θ — same triangle, flipped fraction.</p>
+          </article>
+
+          <article class="card ratio-card" data-pair="cos">
+            <header>
+              <span class="pair-badge">cos ↔ sec</span>
+              <span class="warn-badge" id="warnCos" hidden data-i18n="m3.undefined">undefined</span>
+            </header>
+            <div class="pair-row">
+              <div class="pair-side">
+                <span class="pair-name">cos θ</span>
+                <span class="pair-formula"><span class="frac frac-sym"><span class="num">adj</span><span class="den">hyp</span></span></span>
+                <strong class="pair-value" id="recipCosVal">0.8192</strong>
+              </div>
+              <span class="pair-arrow" aria-hidden="true">⇄</span>
+              <div class="pair-side">
+                <span class="pair-name">sec θ</span>
+                <span class="pair-formula"><span class="frac frac-sym"><span class="num">hyp</span><span class="den">adj</span></span></span>
+                <strong class="pair-value" id="recipSecVal">1.2208</strong>
+              </div>
+            </div>
+            <p class="micro" data-i18n="m3.cosNote">sec θ is just 1 ÷ cos θ. At 90° the adjacent side collapses, so sec is undefined.</p>
+          </article>
+
+          <article class="card ratio-card" data-pair="tan">
+            <header>
+              <span class="pair-badge">tan ↔ cot</span>
+              <span class="warn-badge" id="warnTan" hidden data-i18n="m3.undefined">undefined</span>
+            </header>
+            <div class="pair-row">
+              <div class="pair-side">
+                <span class="pair-name">tan θ</span>
+                <span class="pair-formula"><span class="frac frac-sym"><span class="num">opp</span><span class="den">adj</span></span></span>
+                <strong class="pair-value" id="recipTanVal">0.7002</strong>
+              </div>
+              <span class="pair-arrow" aria-hidden="true">⇄</span>
+              <div class="pair-side">
+                <span class="pair-name">cot θ</span>
+                <span class="pair-formula"><span class="frac frac-sym"><span class="num">adj</span><span class="den">opp</span></span></span>
+                <strong class="pair-value" id="recipCotVal">1.4281</strong>
+              </div>
+            </div>
+            <p class="micro" data-i18n="m3.tanNote">tan θ and cot θ are reciprocals. At 90° the adjacent side is 0, so both blow up.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================= MODULE 4 ============================= -->
+    <section class="panel" id="panel-practice" role="tabpanel" aria-labelledby="tab-practice" hidden>
+      <div class="panel-head">
+        <div>
+          <h2 data-i18n="m4.title">Khan Practice Sandbox</h2>
+          <p class="lede" data-i18n="m4.desc">Retrieve, check, and grow a streak. Three problem modes, worked solutions on demand.</p>
+        </div>
+        <div class="pill" data-i18n="m4.goal">Goal: active recall &amp; mastery</div>
+      </div>
+
+      <div class="grid practice-grid">
+        <article class="card practice-card">
+          <div class="mode-row" role="group" aria-label="Problem mode">
+            <button class="mode-btn is-active" type="button" data-mode="ratio">
+              <span aria-hidden="true">△</span> <span data-i18n="m4.modeRatio">Find the Ratio</span>
+            </button>
+            <button class="mode-btn" type="button" data-mode="side">
+              <span aria-hidden="true">📐</span> <span data-i18n="m4.modeSide">Missing Side</span>
+            </button>
+            <button class="mode-btn" type="button" data-mode="story">
+              <span aria-hidden="true">🏗️</span> <span data-i18n="m4.modeStory">Story Problem</span>
+            </button>
+          </div>
+
+          <div class="problem-head">
+            <span class="problem-tag" id="problemTag">FIND THE RATIO</span>
+            <button class="btn btn-ghost btn-small" id="newProblemBtn" type="button">🎲 <span data-i18n="m4.new">New problem</span></button>
+          </div>
+
+          <p class="problem-text" id="problemText">Loading…</p>
+          <p class="problem-question" id="problemQuestion"></p>
+
+          <form class="answer-row" id="answerForm" autocomplete="off">
+            <label class="sr-only" for="answerInput" data-i18n="m4.answerLabel">Your answer</label>
+            <input id="answerInput" class="answer-input" type="text" inputmode="text" data-i18n-placeholder="m4.placeholder" placeholder="e.g. 0.6 or 3/5" />
+            <button class="btn btn-primary" id="checkBtn" type="submit" data-i18n="m4.check">Check Answer</button>
+          </form>
+          <p class="answer-hint micro" data-i18n="m4.answerHint">Decimals and fractions are both accepted (0.6 or 3/5).</p>
+
+          <div class="feedback" id="feedback" role="status" aria-live="polite" hidden></div>
+
+          <div class="solution-block">
+            <button class="btn btn-ghost" id="stepsBtn" type="button">
+              💡 <span data-i18n="m4.showSteps">Show Step-by-Step Visual Solution</span>
+            </button>
+            <ol class="steps" id="stepsList" aria-live="polite"></ol>
+          </div>
+        </article>
+
+        <aside class="stack">
+          <article class="card score-card">
+            <h3 class="card-title" data-i18n="m4.progress">Your progress</h3>
+            <div class="score-grid">
+              <div class="score-cell">
+                <span data-i18n="streak">Streak</span>
+                <strong id="practiceStreak">0</strong>
+              </div>
+              <div class="score-cell">
+                <span data-i18n="best">Best</span>
+                <strong id="practiceBest">0</strong>
+              </div>
+              <div class="score-cell">
+                <span data-i18n="m4.correct">Correct</span>
+                <strong id="practiceCorrect">0</strong>
+              </div>
+            </div>
+            <div class="mastery-block">
+              <div class="mastery-head">
+                <span data-i18n="mastery">Mastery</span>
+                <strong id="practiceMastery">0%</strong>
+              </div>
+              <div class="mastery-track"><div class="mastery-fill" id="masteryFill" style="width:0%"></div></div>
+              <p class="micro" id="masteryHint" data-i18n="m4.masteryHint">20 correct answers unlock Unit 1 mastery.</p>
+            </div>
+          </article>
+
+          <article class="card badges-card">
+            <h3 class="card-title" data-i18n="m4.badges">Mastery badges</h3>
+            <div class="badge-grid" id="badgeGrid"></div>
+          </article>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <span>△ <span data-i18n="footerBuilt">Built for active learning</span></span>
+    <span class="dot-sep">·</span>
+    <span id="footCredit">OpenCode × deepseek-v4.1-flash</span>
+  </footer>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+<noscript><p class="noscript">This studio needs JavaScript enabled. / ห้องเรียนนี้ต้องเปิดใช้งาน JavaScript</p></noscript>
+
+<script src="script.js"></script>
+</body>
+</html>
