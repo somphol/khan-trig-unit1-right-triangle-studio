@@ -1,0 +1,30 @@
+cff-version: 1.2.0
+message: "If you use this studio in teaching, outreach or research, please cite it as below."
+type: software
+title: "Khan Trig Companion: Unit 1 Right Triangle Studio"
+version: 1.0.0
+date-released: 2026-11-03
+authors:
+  - family-names: Boonjing
+    given-names: Somphol
+license: MIT
+repository-code: "https://github.com/somphol/khan-trig-unit1-right-triangle-studio"
+url: "https://somphol.github.io/khan-trig-unit1-right-triangle-studio/"
+abstract: >-
+  A dependency-free, bilingual (English and Thai) interactive companion for
+  Khan Academy Trigonometry Unit 1. Four canvas studios cover SOH-CAH-TOA and
+  ratio constancy, 45-45-90 and 30-60-90 special triangles, reciprocal ratios,
+  and a practice sandbox with generated problems, step-by-step solutions,
+  streaks and badges. The site runs entirely in the browser and stores progress
+  locally.
+keywords:
+  - trigonometry
+  - right triangles
+  - SOH-CAH-TOA
+  - special right triangles
+  - reciprocal trigonometric ratios
+  - mathematics education
+  - interactive learning
+  - bilingual education
+  - Thai
+  - HTML5 Canvas

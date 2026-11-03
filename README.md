@@ -2,6 +2,8 @@
 
 An interactive, bilingual companion for **Khan Academy Trigonometry, Unit 1: Right Triangles & Trigonometry**. Instead of reading equations, students drag vertices, scale triangles, flip reciprocal ratios, and drill generated problems — all in one offline HTML page with zero dependencies.
 
+**Version 1.0.0** · [Live demo](https://somphol.github.io/khan-trig-unit1-right-triangle-studio/) · MIT · No build step
+
 ![Screenshot of the SOH-CAH-TOA module](assets/hero.jpg)
 
 ## The four studios
@@ -34,31 +36,57 @@ cd khan-trig-unit1-right-triangle-studio
 python3 -m http.server 8080
 ```
 
-Open <http://localhost:8080>. Opening `index.html` directly from Finder also works; the app only needs `file://` access to its two local assets.
+Open <http://localhost:8080>. Opening `index.html` directly from Finder also works; the app only needs `file://` access to its local assets.
 
-## Deploy
+## Documentation
 
-The repository is a plain static site. GitHub Pages serves it from `main` / root:
+| Document | Purpose |
+|----------|---------|
+| [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | State model, canvas contract, geometry, i18n, extension recipes |
+| [docs/DESIGN.md](docs/DESIGN.md) | Pedagogy, colour matrix, Thai glossary, interaction decisions |
+| [docs/TESTING.md](docs/TESTING.md) | Automated checks, verified matrix, manual regression list |
+| [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md) | GitHub Pages setup, verification, rollback, custom domain |
+| [docs/ACCESSIBILITY.md](docs/ACCESSIBILITY.md) | WCAG target, implemented features, known gaps |
+| [docs/RELEASE.md](docs/RELEASE.md) | Versioning, release checklist, hotfix and rollback |
+| [CONTRIBUTING.md](CONTRIBUTING.md) | Ground rules, local setup, PR expectations |
+| [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) | Contributor Covenant 2.1 |
+| [SECURITY.md](SECURITY.md) | Supported versions, private reporting, scope |
+| [SUPPORT.md](SUPPORT.md) | Common fixes and where to ask |
+| [ROADMAP.md](ROADMAP.md) | Shipped work, candidates, non-goals |
+| [CHANGELOG.md](CHANGELOG.md) | Release history |
+| [state.json](state.json) | Build record: time, tokens and credits |
+| [AGENTS.md](AGENTS.md) | Operating notes for the next developer or agent |
 
-**<https://somphol.github.io/khan-trig-unit1-right-triangle-studio/>**
+## Quality gates
 
-Any static host (Netlify, Cloudflare Pages, S3) works the same way — upload the repository root.
+```bash
+node --check script.js      # JavaScript syntax
+node scripts/check.mjs      # files, ids, i18n parity, colours, links, state
+```
+
+Both run in GitHub Actions on every push and pull request. The checker has no dependencies and verifies that the English and Thai dictionaries stay in sync, every referenced DOM id exists, local assets resolve, and runtime code contains no network APIs.
 
 ## Project structure
 
 ```
-index.html   Markup for the HUD, four panels and all bilingual hooks
-style.css    Palette, layout, responsive rules, sliders, fractions, animations
-script.js    State, i18n, canvas engines, problem generator, export
-state.json   Build record: elapsed time, token usage, credits
-AGENTS.md    Operating notes for the next developer or agent
+index.html                 Markup for the HUD, four panels and bilingual hooks
+style.css                  Palette, layout, responsive rules, sliders, fractions
+script.js                  State, i18n, canvas engines, generator, export
+scripts/check.mjs          Dependency-free static release checks
+docs/                      Architecture, design, testing, deployment, a11y, release
+.github/                   CI, issue templates, PR template, CODEOWNERS
+state.json                 Build record: elapsed time, token usage, credits
+AGENTS.md                  Operating notes for the next developer or agent
+assets/hero.jpg            Documentation screenshot only
 ```
-
-There are no generated assets and no dependencies. `assets/hero.jpg` is documentation only.
 
 ## Data and privacy
 
 Everything stays in the browser. The only storage is `localStorage["khanTrigUnit1.v1"]` (language, settings, streak, badge list). The export button creates a local Blob; nothing is uploaded. Clearing site data resets the studio.
+
+## Contributing
+
+Issues and pull requests are welcome. Read [CONTRIBUTING.md](CONTRIBUTING.md) and keep the project static, offline and bilingual. Report vulnerabilities privately per [SECURITY.md](SECURITY.md).
 
 ## Credits
 
