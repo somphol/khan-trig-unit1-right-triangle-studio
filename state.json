@@ -1,0 +1,77 @@
+{
+  "project": "Khan Trig Companion: Unit 1 Right Triangle Studio",
+  "session": {
+    "id": "ses_e60a2ea01ffewQMjVLNWKAti2n",
+    "startedAt": "2026-11-03T03:04:03Z",
+    "capturedAt": "2026-11-03T03:13:37Z",
+    "elapsedSeconds": 574,
+    "elapsed": "9m 34s",
+    "note": "Wall-clock build time from the first tool call to this capture. The app, the GitHub repository and the first GitHub Pages deployment were already complete at capture time."
+  },
+  "model": {
+    "name": "DeepSeek V4.1 Flash",
+    "id": "deepseek-v4.1-flash",
+    "provider": "opencode-go"
+  },
+  "usage": {
+    "inputTokens": 233849,
+    "outputTokens": 53703,
+    "reasoningTokens": 46611,
+    "cacheReadTokens": 3201536,
+    "cacheWriteTokens": 1854,
+    "totalTokens": 3537553,
+    "costUSD": 0,
+    "note": "Read from the OpenCode session database. totalTokens is the sum of all five counters, including cache reads; cache reads are repeated prompt context and dominate the figure. costUSD is 0 on the flat-rate plan."
+  },
+  "artifacts": {
+    "sourceFiles": [
+      "index.html",
+      "style.css",
+      "script.js"
+    ],
+    "lineCounts": {
+      "index.html": 455,
+      "style.css": 822,
+      "script.js": 1502
+    },
+    "supportingFiles": [
+      "README.md",
+      "AGENTS.md",
+      "LICENSE",
+      "state.json",
+      ".nojekyll",
+      ".gitignore",
+      "assets/hero.jpg"
+    ]
+  },
+  "verification": {
+    "method": "Headless Chrome over the DevTools Protocol, plus node --check",
+    "checks": [
+      "All four modules render and switch cleanly",
+      "Default 30° ratios: sin 0.5000, cos 0.8660, tan 0.5774",
+      "Scale 2.5× keeps ratios constant and shows the constancy badge",
+      "45° and 30°-60°-90° exact radical tables update with x",
+      "Reciprocal ratios correct at 35°; undefined warnings at 0° and 90°",
+      "Generated ratio problem solved and streak/mastery/badge updated",
+      "Step-by-step solution renders three animated steps",
+      "EN ⇄ TH switch updates static and dynamic text",
+      "Reload restores language, streak, correct count and completed tabs",
+      "Export produces an application/json Blob",
+      "390 px mobile viewport: no horizontal overflow"
+    ],
+    "consoleErrors": 0
+  },
+  "deployment": {
+    "repository": "https://github.com/somphol/khan-trig-unit1-right-triangle-studio",
+    "pages": "https://somphol.github.io/khan-trig-unit1-right-triangle-studio/",
+    "host": "GitHub Pages",
+    "branch": "main",
+    "path": "/"
+  },
+  "credits": {
+    "tool": "OpenCode",
+    "toolURL": "https://opencode.ai",
+    "model": "DeepSeek V4.1 Flash",
+    "modelID": "opencode-go/deepseek-v4.1-flash"
+  }
+}
